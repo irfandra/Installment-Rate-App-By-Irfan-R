@@ -1,9 +1,12 @@
 package com.IrfanEcomProject.Ecom.controllers;
 
+import com.IrfanEcomProject.Ecom.dtos.RestResponse;
 import com.IrfanEcomProject.Ecom.dtos.category.CategoryHeaderDTO;
 import com.IrfanEcomProject.Ecom.dtos.category.CategoryInsertDTO;
 import com.IrfanEcomProject.Ecom.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,28 +20,41 @@ public class CategoryController {
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
+
     @GetMapping("get-all")
-    public List<CategoryHeaderDTO> findAllCategory(){
-        return categoryService.findAllCategory();
+    public ResponseEntity<RestResponse<List<CategoryHeaderDTO>>> getAllCategory() {
+        return new ResponseEntity<>(
+                new RestResponse<>(categoryService.findAllCategoryStream(),
+                        "Category Find Success",
+                        200),
+                HttpStatus.OK);
     }
 
-    @GetMapping("get-all-stream")
-    public List<CategoryHeaderDTO> findAllCategoryStream(){
-        return categoryService.findAllCategoryStream();
-    }
 
     @PostMapping("insert")
-    public boolean insertCategory(@RequestBody CategoryInsertDTO categoryInsertDTO) {
-        return categoryService.insertCategory(categoryInsertDTO);
+    public ResponseEntity<RestResponse<Boolean>> insertCategory(@RequestBody CategoryInsertDTO categoryInsertDTO) {
+        return new ResponseEntity<>(
+                new RestResponse<>(categoryService.insertCategory(categoryInsertDTO),
+                        "Category Insert Success",
+                        201),
+                HttpStatus.CREATED);
     }
 
     @PutMapping("{categoryId}")
-    public boolean updateCategory(@PathVariable String categoryId, @RequestBody CategoryInsertDTO categoryUpdate) {
-        return categoryService.updateCategory(categoryId, categoryUpdate);
+    public ResponseEntity<RestResponse<Boolean>> updateCategory(@PathVariable("categoryId") String categoryId, @RequestBody CategoryInsertDTO categoryInsertDTO) {
+        return new ResponseEntity<>(
+                new RestResponse<>(categoryService.updateCategory(categoryId, categoryInsertDTO),
+                        "Category Update Success",
+                        200),
+                HttpStatus.OK);
     }
 
     @DeleteMapping("by-string/{categoryId}")
-    public String deleteAllCategoryByStringId(@PathVariable String categoryId) {
-        return categoryService.deleteCategoryByStringId(categoryId);
+    public ResponseEntity<RestResponse<Boolean>> deleteCategoryByString(@PathVariable("categoryId") String categoryId) {
+        return new ResponseEntity<>(
+                new RestResponse<>(categoryService.deleteCategoryByStringId(categoryId),
+                        "Category Delete Success",
+                        200),
+                HttpStatus.OK);
     }
 }

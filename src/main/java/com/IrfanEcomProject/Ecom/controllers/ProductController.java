@@ -1,9 +1,12 @@
 package com.IrfanEcomProject.Ecom.controllers;
 
+import com.IrfanEcomProject.Ecom.dtos.RestResponse;
 import com.IrfanEcomProject.Ecom.dtos.product.ProductHeaderDTO;
 import com.IrfanEcomProject.Ecom.dtos.product.ProductInsertDTO;
 import com.IrfanEcomProject.Ecom.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,19 +20,35 @@ public class ProductController {
         this.productService = productService;
     }
     @GetMapping("get-all")
-    public List<ProductHeaderDTO> findAllProduct(){
-        return productService.findAllProduct();
+    public ResponseEntity<RestResponse<List<ProductHeaderDTO>>> getAllProduct() {
+        return new ResponseEntity<>(
+                new RestResponse<>(productService.findAllProduct(),
+                        "Product Find Success",
+                        200),
+                HttpStatus.OK);
     }
     @PostMapping("insert")
-    public boolean insertProduct(@RequestBody ProductInsertDTO productInsertDTO) {
-        return productService.insertProduct(productInsertDTO);
+    public ResponseEntity<RestResponse<Boolean>> insertProduct(@RequestBody ProductInsertDTO productInsertDTO) {
+        return new ResponseEntity<>(
+                new RestResponse<>(productService.insertProduct(productInsertDTO),
+                        "Product Insert Success",
+                        201),
+                HttpStatus.CREATED);
     }
     @DeleteMapping("by-string/{productId}")
-    public String deleteAllProductByStringId(@PathVariable String productId) {
-        return productService.deleteProductByStringId(productId);
+    public ResponseEntity<RestResponse<Boolean>> deleteProductByString(@PathVariable("productId") String productId) {
+        return new ResponseEntity<>(
+                new RestResponse<>(productService.deleteProductByStringId(productId),
+                        "Product Delete Success",
+                        200),
+                HttpStatus.OK);
     }
     @PutMapping("{productId}")
-    public boolean updateProduct(@PathVariable String productId, @RequestBody ProductInsertDTO productUpdate) {
-        return productService.updateProduct(productId, productUpdate);
+    public ResponseEntity<RestResponse<Boolean>> updateProduct(@PathVariable("productId") String productId, @RequestBody ProductInsertDTO productInsertDTO) {
+        return new ResponseEntity<>(
+                new RestResponse<>(productService.updateProduct(productId, productInsertDTO),
+                        "Product Update Success",
+                        200),
+                HttpStatus.OK);
     }
 }

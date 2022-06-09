@@ -7,6 +7,7 @@ import com.IrfanEcomProject.Ecom.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,18 +20,12 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<CategoryHeaderDTO> findAllCategory() {
-        return CategoryHeaderDTO.toList(categoryRepository.findAll());
-
-    }
-
     public List<CategoryHeaderDTO> findAllCategoryStream() {
         List<Category> categoryList = categoryRepository.findAll();
         List<CategoryHeaderDTO> categoryStream = categoryList.stream()
                 .map(category -> new CategoryHeaderDTO(category.getId(),
                         category.getDescription()))
                 .collect(Collectors.toList());
-
         return categoryStream;
     }
 
@@ -40,14 +35,16 @@ public class CategoryService {
         return true;
     }
 
-    public String deleteCategoryByStringId(String categoryId) {
-        Category checkId = categoryRepository.findById(categoryId).orElse(null);
+    public boolean deleteCategoryByStringId(String categoryId) {
+        Category checkId = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new EntityNotFoundException("Category "+ categoryId +" Not Found"));
         categoryRepository.deleteById(checkId.getId());
-        return "Deleted";
+        return true;
     }
 
     public boolean updateCategory(String categoryId, CategoryInsertDTO categoryUpdate) {
-        Category checkId = categoryRepository.findById(categoryId).orElse(null);
+        Category checkId = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new EntityNotFoundException("Category "+ categoryId +" Not Found"));;
         checkId.setId(categoryUpdate.getCategoryName() == null ? checkId.getId() : categoryUpdate.getCategoryName());
         checkId.setDescription(categoryUpdate.getDescription() == null ? checkId.getDescription() : categoryUpdate.getDescription());
         categoryRepository.save(checkId);

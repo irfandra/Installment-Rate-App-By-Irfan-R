@@ -21,7 +21,7 @@ public class TransactionInsertDTO {
 
     public Transaction convert(Transaction transactionId, Product product, PaymentDetail paymentDetail) {
         return new Transaction(customTicket(transactionId), customerId, paymentId, productName, calculateDownPayment(product)
-                , calculateMonthlyPayment(product, paymentDetail),calculateTotalFirstPayment(), calculateTotalPrice(product));
+                , calculateMonthlyPayment(product, paymentDetail),calculateTotalFirstPayment(), calculateTotalPrice(product, paymentDetail));
     }
 
     private String customTicket(Transaction transactionId) {
@@ -60,8 +60,10 @@ public class TransactionInsertDTO {
         return Double.parseDouble(downPayment) + Double.parseDouble(monthlyPayment) + "";
     }
 
-    private String calculateTotalPrice(Product productPrice) {
-        totalPrice = productPrice.getPrice().doubleValue() + "";
+    private String calculateTotalPrice(Product productPrice,PaymentDetail installmentYear) {
+        calculateMonthlyPayment(productPrice, installmentYear);
+        double total = (Double.parseDouble(monthlyPayment) * (installmentYear.getInstallmentYear() * 12)) + Double.parseDouble(downPayment);
+        totalPrice = total + "";
         return totalPrice;
     }
 

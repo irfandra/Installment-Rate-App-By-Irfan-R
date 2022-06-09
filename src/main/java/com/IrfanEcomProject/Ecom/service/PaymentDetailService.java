@@ -7,6 +7,7 @@ import com.IrfanEcomProject.Ecom.repositories.PaymentDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -25,13 +26,16 @@ public class PaymentDetailService {
         return true;
     }
 
-    public String deleteAllPaymentDetailById(Integer paymentDetailId) {
-        paymentDetailRepository.deleteById(paymentDetailId);
-        return "Deleted";
+    public boolean deleteAllPaymentDetailById(Integer paymentDetailId) {
+        PaymentDetail checkId = paymentDetailRepository.findById(paymentDetailId)
+                .orElseThrow(() -> new EntityNotFoundException("Payment Detail "+ paymentDetailId +" Not Found"));;
+        paymentDetailRepository.deleteById(checkId.getId());
+        return true;
     }
 
     public boolean updatePaymentDetail(Integer paymentDetailId, PaymentDetailInsertDTO paymentDetailUpdate) {
-        PaymentDetail paymentDetail = paymentDetailRepository.findById(paymentDetailId).get();
+        PaymentDetail paymentDetail = paymentDetailRepository.findById(paymentDetailId)
+                        .orElseThrow(() -> new EntityNotFoundException("Payment Detail "+ paymentDetailId +" Not Found"));;
         paymentDetail.setInstallmentYear(paymentDetailUpdate.getInstallmentYear()==null?paymentDetail.getInstallmentYear():paymentDetailUpdate.getInstallmentYear());
         paymentDetail.setInterestRate(paymentDetailUpdate.getInterestRate()==null?paymentDetail.getInterestRate():paymentDetailUpdate.getInterestRate());
         paymentDetailRepository.save(paymentDetail);

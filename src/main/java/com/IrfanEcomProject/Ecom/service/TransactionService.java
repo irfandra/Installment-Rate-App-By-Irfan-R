@@ -11,7 +11,9 @@ import com.IrfanEcomProject.Ecom.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TransactionService {
@@ -26,25 +28,37 @@ public class TransactionService {
         this.paymentDetailRepository = paymentDetailRepository;
     }
     public List<TransactionHeaderDTO> findAllTransaction() {
+        if(transactionRepository.findAll().isEmpty()) {
+            throw new EntityNotFoundException("No Transaction Found");
+        }
         return TransactionHeaderDTO.toList(transactionRepository.findAll());
     }
 
-    public void insertTransaction(TransactionInsertDTO transactionInsertDTO) {
+    public boolean insertTransaction(TransactionInsertDTO transactionInsertDTO) {
         Transaction initialTicket = transactionRepository.getInitialTransactionId();
         Product product = productRepository.findIdByProductName(transactionInsertDTO.getProductName());
+        if(product == null) {
+            throw new EntityNotFoundException("Product "+ transactionInsertDTO.getProductName() + " Not Found");
+        }
         PaymentDetail paymentDetail = paymentDetailRepository.findIdByPaymentType(transactionInsertDTO.getPaymentId());
+        if(paymentDetail == null) {
+            throw new EntityNotFoundException("Payment Detail" + transactionInsertDTO.getPaymentId() +" Not Found");
+        }
         Transaction transaction = transactionInsertDTO.convert(initialTicket, product,paymentDetail);
         if(product.getUnitInStock()==0){
             throw new RuntimeException("Product is out of stock");
         }
         product.setUnitInStock(product.getUnitInStock() - 1);
         transactionRepository.save(transaction);
+        return true;
     }
 
-    public void deleteTransaction(String id) {
-        Transaction transaction = transactionRepository.findById(id).get();
+    public boolean deleteTransaction(String transactionId) {
+        Transaction transaction = transactionRepository.findById(transactionId)
+                .orElseThrow(() -> new EntityNotFoundException("Transaction "+ transactionId +" Not Found"));
         Product product = productRepository.findIdByProductName(transaction.getProductName().getId());
         product.setUnitInStock(product.getUnitInStock() + 1);
-        transactionRepository.deleteById(id);
+        transactionRepository.deleteById(transactionId);
+        return true;
     }
 }

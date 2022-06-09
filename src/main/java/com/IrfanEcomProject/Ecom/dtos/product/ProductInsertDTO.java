@@ -3,8 +3,6 @@ package com.IrfanEcomProject.Ecom.dtos.product;
 import com.IrfanEcomProject.Ecom.models.Product;
 import lombok.Data;
 
-import java.text.NumberFormat;
-import java.util.Locale;
 
 @Data
 public class ProductInsertDTO {
@@ -16,7 +14,8 @@ public class ProductInsertDTO {
 
 
     public Product toProduct() {
-        return new Product(productName,
+        return new Product(
+                productName,
                 description,
                 price,
                 categoryName,

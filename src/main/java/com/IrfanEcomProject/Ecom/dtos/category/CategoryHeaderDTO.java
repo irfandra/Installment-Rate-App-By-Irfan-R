@@ -16,13 +16,4 @@ public class CategoryHeaderDTO {
     public static CategoryHeaderDTO set(Category category) {
         return new CategoryHeaderDTO(category.getId(), category.getDescription());
     }
-
-    public static List<CategoryHeaderDTO> toList(List<Category> categories) {
-        List<CategoryHeaderDTO> result = new ArrayList<>();
-        for (Category e: categories
-        ) {
-            result.add(set(e));
-        }
-        return result;
-    }
 }
