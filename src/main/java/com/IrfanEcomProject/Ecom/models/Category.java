@@ -15,7 +15,7 @@ import java.util.Set;
 public class Category {
     @Id
     @Column(name = "CategoryName", nullable = false, length = 20)
-    private String categoryName;
+    private String id;
 
     @Column(name = "Description", length = 100)
     private String description;
@@ -24,20 +24,20 @@ public class Category {
     private Set<Product> products = new LinkedHashSet<>();
 
     public Category(String categoryName, String description) {
-        this.categoryName = categoryName;
+        this.id = categoryName;
         this.description = description;
     }
 
     public Category(String categoryName) {
-        this.categoryName = categoryName;
+        this.id = categoryName;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getId() {
+        return id;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDescription() {

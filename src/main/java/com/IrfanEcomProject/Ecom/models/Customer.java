@@ -7,8 +7,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Customer {
     @Id
@@ -39,7 +39,10 @@ public class Customer {
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.phone = phone;
-        this.address = address;
+    }
+
+    public Customer(Integer customerId) {
+        this.id = customerId;
     }
 
     public Integer getId() {

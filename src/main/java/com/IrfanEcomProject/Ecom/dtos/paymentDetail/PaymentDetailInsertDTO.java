@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class PaymentDetailInsertDTO {
     private Integer installmentYear;
-    private String interestRate;
+    private Double interestRate;
 
     public PaymentDetail toPaymentDetail() {
         return new PaymentDetail(installmentYear, interestRate);

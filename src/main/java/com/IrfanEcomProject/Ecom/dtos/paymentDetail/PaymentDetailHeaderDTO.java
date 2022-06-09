@@ -10,7 +10,7 @@ import java.util.List;
 public class PaymentDetailHeaderDTO {
     private final Integer paymentId;
     private final Integer installmentYear;
-    private final String interestRate;
+    private final Double interestRate;
 
     public static PaymentDetailHeaderDTO set(PaymentDetail paymentDetail) {
         return new PaymentDetailHeaderDTO(

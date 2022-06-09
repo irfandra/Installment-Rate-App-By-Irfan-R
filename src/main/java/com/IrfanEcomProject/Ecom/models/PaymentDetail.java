@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class PaymentDetail {
     @Id
@@ -19,14 +19,18 @@ public class PaymentDetail {
     private Integer installmentYear;
 
     @Column(name = "InterestRate", nullable = false, length = 10)
-    private String interestRate;
+    private Double interestRate;
 
     @OneToMany(mappedBy = "payment")
     private Set<Transaction> transactions = new LinkedHashSet<>();
 
-    public PaymentDetail(Integer installmentYear, String interestRate) {
+    public PaymentDetail(Integer installmentYear, Double interestRate) {
         this.installmentYear = installmentYear;
         this.interestRate = interestRate;
+    }
+
+    public PaymentDetail(Integer paymentId) {
+        this.id = paymentId;
     }
 
     public Integer getId() {
@@ -45,11 +49,11 @@ public class PaymentDetail {
         this.installmentYear = installmentYear;
     }
 
-    public String getInterestRate() {
+    public Double getInterestRate() {
         return interestRate;
     }
 
-    public void setInterestRate(String interestRate) {
+    public void setInterestRate(Double interestRate) {
         this.interestRate = interestRate;
     }
 

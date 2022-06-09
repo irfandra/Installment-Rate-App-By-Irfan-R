@@ -12,12 +12,14 @@ public class ProductInsertDTO {
     private String description;
     private String price;
     private String categoryName;
+    private Integer unitInStock;
 
 
     public Product toProduct() {
         return new Product(productName,
                 description,
                 price,
-                categoryName);
+                categoryName,
+                unitInStock);
     }
 }

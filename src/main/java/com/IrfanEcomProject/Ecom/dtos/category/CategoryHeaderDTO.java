@@ -14,7 +14,7 @@ public class CategoryHeaderDTO {
     private final String Description;
 
     public static CategoryHeaderDTO set(Category category) {
-        return new CategoryHeaderDTO(category.getCategoryName(), category.getDescription());
+        return new CategoryHeaderDTO(category.getId(), category.getDescription());
     }
 
     public static List<CategoryHeaderDTO> toList(List<Category> categories) {

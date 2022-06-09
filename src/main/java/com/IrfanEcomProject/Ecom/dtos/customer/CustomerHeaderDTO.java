@@ -10,8 +10,6 @@ import java.util.List;
 @Data
 public class CustomerHeaderDTO {
     private final Integer customerId;
-//    private final String firstName;
-//    private final String lastName;
     private final String fullName;
     private final String birthDate;
     private final String phone;

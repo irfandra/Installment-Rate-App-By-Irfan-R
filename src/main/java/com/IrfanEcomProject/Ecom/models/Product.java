@@ -1,20 +1,15 @@
 package com.IrfanEcomProject.Ecom.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Getter
-@Setter
 public class Product {
     @Id
     @Column(name = "ProductName", nullable = false, length = 20)
@@ -30,14 +25,22 @@ public class Product {
     @JoinColumn(name = "CategoryName")
     private Category categoryName;
 
+    @Column(name = "UnitInStock")
+    private Integer unitInStock;
+
     @OneToMany(mappedBy = "productName")
     private Set<Transaction> transactions = new LinkedHashSet<>();
 
-    public Product(String productName, String description, String price, String categoryName) {
+    public Product(String productName, String description, String price, String categoryName, Integer unitInStock) {
         this.id = productName;
         this.description = description;
         this.price = new BigDecimal(price);
         this.categoryName = new Category(categoryName);
+        this.unitInStock = unitInStock;
+    }
+
+    public Product(String productName) {
+        this.id = productName;
     }
 
     public String getId() {
@@ -70,6 +73,14 @@ public class Product {
 
     public void setCategoryName(Category categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public Integer getUnitInStock() {
+        return unitInStock;
+    }
+
+    public void setUnitInStock(Integer unitInStock) {
+        this.unitInStock = unitInStock;
     }
 
     public Set<Transaction> getTransactions() {

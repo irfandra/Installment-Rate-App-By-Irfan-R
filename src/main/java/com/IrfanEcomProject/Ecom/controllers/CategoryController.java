@@ -22,6 +22,11 @@ public class CategoryController {
         return categoryService.findAllCategory();
     }
 
+    @GetMapping("get-all-stream")
+    public List<CategoryHeaderDTO> findAllCategoryStream(){
+        return categoryService.findAllCategoryStream();
+    }
+
     @PostMapping("insert")
     public boolean insertCategory(@RequestBody CategoryInsertDTO categoryInsertDTO) {
         return categoryService.insertCategory(categoryInsertDTO);

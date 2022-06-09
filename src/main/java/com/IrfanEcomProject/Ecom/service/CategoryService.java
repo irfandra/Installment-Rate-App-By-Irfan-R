@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryService {
@@ -18,9 +19,19 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<CategoryHeaderDTO> findAllCategory(){
+    public List<CategoryHeaderDTO> findAllCategory() {
         return CategoryHeaderDTO.toList(categoryRepository.findAll());
 
+    }
+
+    public List<CategoryHeaderDTO> findAllCategoryStream() {
+        List<Category> categoryList = categoryRepository.findAll();
+        List<CategoryHeaderDTO> categoryStream = categoryList.stream()
+                .map(category -> new CategoryHeaderDTO(category.getId(),
+                        category.getDescription()))
+                .collect(Collectors.toList());
+
+        return categoryStream;
     }
 
     public boolean insertCategory(CategoryInsertDTO categoryInsertDTO) {
@@ -31,14 +42,14 @@ public class CategoryService {
 
     public String deleteCategoryByStringId(String categoryId) {
         Category checkId = categoryRepository.findById(categoryId).orElse(null);
-        categoryRepository.deleteById(checkId.getCategoryName());
+        categoryRepository.deleteById(checkId.getId());
         return "Deleted";
     }
 
     public boolean updateCategory(String categoryId, CategoryInsertDTO categoryUpdate) {
         Category checkId = categoryRepository.findById(categoryId).orElse(null);
-        checkId.setCategoryName(categoryUpdate.getCategoryName()==null?checkId.getCategoryName():categoryUpdate.getCategoryName());
-        checkId.setDescription(categoryUpdate.getDescription()==null?checkId.getDescription():categoryUpdate.getDescription());
+        checkId.setId(categoryUpdate.getCategoryName() == null ? checkId.getId() : categoryUpdate.getCategoryName());
+        checkId.setDescription(categoryUpdate.getDescription() == null ? checkId.getDescription() : categoryUpdate.getDescription());
         categoryRepository.save(checkId);
         return true;
     }
