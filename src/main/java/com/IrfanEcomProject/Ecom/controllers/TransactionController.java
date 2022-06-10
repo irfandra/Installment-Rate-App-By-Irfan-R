@@ -4,7 +4,7 @@ import com.IrfanEcomProject.Ecom.dtos.RestResponse;
 import com.IrfanEcomProject.Ecom.dtos.transaction.TransactionCustomerDTO;
 import com.IrfanEcomProject.Ecom.dtos.transaction.TransactionHeaderDTO;
 import com.IrfanEcomProject.Ecom.dtos.transaction.TransactionInsertDTO;
-import com.IrfanEcomProject.Ecom.service.TransactionService;
+import com.IrfanEcomProject.Ecom.service.TransactionServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +15,15 @@ import java.util.List;
 @RestController
 @RequestMapping("transaction")
 public class TransactionController {
-    private TransactionService transactionService;
+    private TransactionServiceImplementation transactionServiceImplementation;
     @Autowired
-    public TransactionController(TransactionService transactionService) {
-        this.transactionService = transactionService;
+    public TransactionController(TransactionServiceImplementation transactionServiceImplementation) {
+        this.transactionServiceImplementation = transactionServiceImplementation;
     }
     @GetMapping("get-all")
     public ResponseEntity<RestResponse<List<TransactionHeaderDTO>>> getAllTransaction() {
         return new ResponseEntity<>(
-                new RestResponse<>(transactionService.findAllTransaction(),
+                new RestResponse<>(transactionServiceImplementation.findAllTransaction(),
                         "Transaction Find Success",
                         200),
                 HttpStatus.OK);
@@ -31,7 +31,7 @@ public class TransactionController {
     @GetMapping("get-by-full-name")
     public ResponseEntity<RestResponse<List<TransactionCustomerDTO>>> getTransactionByFullName(@RequestParam String fullName) {
         return new ResponseEntity<>(
-                new RestResponse<>(transactionService.findTransactionByFullName(fullName),
+                new RestResponse<>(transactionServiceImplementation.findTransactionByFullName(fullName),
                         "Transaction Find Success",
                         200),
                 HttpStatus.OK);
@@ -39,7 +39,7 @@ public class TransactionController {
     @PostMapping("insert")
     public ResponseEntity<RestResponse<Boolean>> insertTransaction(@RequestBody TransactionInsertDTO transactionInsertDTO) {
         return new ResponseEntity<>(
-                new RestResponse<>(transactionService.insertTransaction(transactionInsertDTO),
+                new RestResponse<>(transactionServiceImplementation.insertTransaction(transactionInsertDTO),
                         "Transaction Insert Success",
                         201),
                 HttpStatus.CREATED);
@@ -47,7 +47,7 @@ public class TransactionController {
     @DeleteMapping("delete")
     public ResponseEntity<RestResponse<Boolean>> deleteTransaction(@RequestParam String transactionId) {
         return new ResponseEntity<>(
-                new RestResponse<>(transactionService.deleteTransaction(transactionId),
+                new RestResponse<>(transactionServiceImplementation.deleteTransaction(transactionId),
                         "Transaction Delete Success",
                         200),
                 HttpStatus.OK);
