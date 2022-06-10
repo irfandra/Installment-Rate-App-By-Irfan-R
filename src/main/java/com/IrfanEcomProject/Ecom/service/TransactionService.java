@@ -9,7 +9,7 @@ import java.util.List;
 public interface TransactionService {
     List<TransactionHeaderDTO> findAllTransaction();
     List<TransactionCustomerDTO> findTransactionByFullName(String fullName);
-    public boolean insertTransaction(TransactionInsertDTO transactionInsertDTO);
-    public boolean deleteTransaction(String transactionId);
+    boolean insertTransaction(TransactionInsertDTO transactionInsertDTO);
+    boolean deleteTransaction(String transactionId);
 
 }

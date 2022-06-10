@@ -6,8 +6,8 @@ import com.IrfanEcomProject.Ecom.dtos.category.CategoryInsertDTO;
 import java.util.List;
 
 public interface CategoryService {
-    public List<CategoryHeaderDTO> findAllCategoryStream();
-    public boolean insertCategory(CategoryInsertDTO categoryInsertDTO);
-    public boolean deleteCategoryByStringId(String categoryId);
-    public boolean updateCategory(String categoryId, CategoryInsertDTO categoryUpdate);
+    List<CategoryHeaderDTO> findAllCategoryStream();
+    boolean insertCategory(CategoryInsertDTO categoryInsertDTO);
+    boolean deleteCategoryByStringId(String categoryId);
+    boolean updateCategory(String categoryId, CategoryInsertDTO categoryUpdate);
 }
