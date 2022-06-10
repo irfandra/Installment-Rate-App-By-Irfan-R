@@ -19,12 +19,8 @@ and also calculating all necessary prices such as monthly payment, down payment,
 #### Database used :
 - MS SQL
 
-
-# Installment Rate App By Irfan R
-
-
-
-<!--- If we have only one group/collection, then no need for the "ungrouped" heading -->
+#### ERD Design
+![alt text](https://github.com/irfandra//blob/[branch]/image.jpg](https://github.com/irfandra/Installment-Rate-App-By-Irfan-R/blob/main/InstallmentAppERD.png)?raw=true)
 
 
 ## Variables
