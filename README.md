@@ -1,29 +1,98 @@
 
 # Installment Rate App By Irfan R
-
-This application store and calculate data between product and customer. 
-
-
-# Project: IrfanEcomProject
-# 📁 Collection: Category 
+A Project which handle customer, product and transaction data with MS SQL database by performing CRUD Operation 
+and also calculating all necessary prices such as monthly payment, down payment, and etc.
 
 
-## End-point: Get All Category
-### Method: GET
->```
->{{base_url}}/category/get-all
->```
+## This Application is built for following purpose:
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ 
+- Storing data of customer until product.
+- Editing or Deleting data between product and customer.
+- Calculating installment rate (Down Payment, Monthly Payment, Total First Payment, and Total Price) 
+- Tracking transaction for every purchase.
 
-## End-point: Insert New Category
-### Method: POST
->```
->{{base_url}}/category/insert
->```
-### Body (**raw**)
+## Technologies used :
+#### Back-End Development
+- Java 
+- Spring Boot
+- MS SQL
+#### Database used :
+- MS SQL
 
-```json
+## Variables
+
+| Key | Value | Type |
+| --- | ------|-------------|
+| base_url | http://localhost:8080 | string |
+
+
+
+## Endpoints
+
+* [Category](#category)
+    1. [Get All Category](#1-get-all-category)
+    1. [Insert New Category](#2-insert-new-category)
+    1. [Update Category](#3-update-category)
+    1. [Delete Category By CategoryName](#4-delete-category-by-categoryname)
+* [Product](#product)
+    1. [Get All Product](#1-get-all-product)
+    1. [Insert New Product](#2-insert-new-product)
+    1. [Update Product](#3-update-product)
+    1. [Delete Product by Id](#4-delete-product-by-id)
+* [Customer](#customer)
+    1. [Get All Customer](#1-get-all-customer)
+    1. [Insert New Customer](#2-insert-new-customer)
+    1. [Delete Customer By Id](#3-delete-customer-by-id)
+    1. [Update Customer](#4-update-customer)
+* [PaymentDetail](#paymentdetail)
+    1. [Get All Payment Detail](#1-get-all-payment-detail)
+    1. [Insert New Payment Detail](#2-insert-new-payment-detail)
+    1. [Update Payment Detail](#3-update-payment-detail)
+    1. [Delete Payment Detail By ID](#4-delete-payment-detail-by-id)
+* [Transaction](#transaction)
+    1. [Get All Transaction](#1-get-all-transaction)
+    1. [Insert New Transaction](#2-insert-new-transaction)
+    1. [Delete Transaction By Id](#3-delete-transaction-by-id)
+
+--------
+
+
+
+## Category
+
+
+
+### 1. Get All Category
+
+
+
+***Endpoint:***
+
+```bash
+Method: GET
+Type: 
+URL: {{base_url}}/category/get-all
+```
+
+
+
+### 2. Insert New Category
+
+
+
+***Endpoint:***
+
+```bash
+Method: POST
+Type: RAW
+URL: {{base_url}}/category/insert
+```
+
+
+
+***Body:***
+
+```js        
 {
     "categoryName":"Airplane",
     "description" : "Brand New or Used Airplane"
@@ -31,51 +100,80 @@ This application store and calculate data between product and customer.
 ```
 
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ 
 
-## End-point: Update Category
-### Method: PUT
->```
->{{base_url}}/category/Airplane
->```
-### Body (**raw**)
+### 3. Update Category
 
-```json
+
+
+***Endpoint:***
+
+```bash
+Method: PUT
+Type: RAW
+URL: {{base_url}}/category/Airplane
+```
+
+
+
+***Body:***
+
+```js        
 {
     "description":"Brand New Airplane and Used Airplane"
 }
 ```
 
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ 
 
-## End-point: Delete Category By CategoryName
-### Method: DELETE
->```
->{{base_url}}/category/by-string/Airplane
->```
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ 
-
-# 📁 Collection: Product 
+### 4. Delete Category By CategoryName
 
 
-## End-point: Get All Product
-### Method: GET
->```
->{{base_url}}/product/get-all
->```
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+***Endpoint:***
 
-## End-point: Insert New Product
-### Method: POST
->```
->{{base_url}}/product/insert
->```
-### Body (**raw**)
+```bash
+Method: DELETE
+Type: 
+URL: {{base_url}}/category/by-string/Airplane
+```
 
-```json
+
+
+## Product
+
+
+
+### 1. Get All Product
+
+
+
+***Endpoint:***
+
+```bash
+Method: GET
+Type: 
+URL: {{base_url}}/product/get-all
+```
+
+
+
+### 2. Insert New Product
+
+
+
+***Endpoint:***
+
+```bash
+Method: POST
+Type: RAW
+URL: {{base_url}}/product/insert
+```
+
+
+
+***Body:***
+
+```js        
 {
 "productName":"Audi R8 V10",
 "description":"Brand New 2012 Facelift",
@@ -86,16 +184,24 @@ This application store and calculate data between product and customer.
 ```
 
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: Update Product
-### Method: PUT
->```
->{{base_url}}/product/Audi R8 V10
->```
-### Body (**raw**)
+### 3. Update Product
 
-```json
+
+
+***Endpoint:***
+
+```bash
+Method: PUT
+Type: RAW
+URL: {{base_url}}/product/Audi R8 V10
+```
+
+
+
+***Body:***
+
+```js        
 {
    
     "description":"Used Car 2010"
@@ -103,34 +209,56 @@ This application store and calculate data between product and customer.
 ```
 
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: Delete Product by Id
-### Method: DELETE
->```
->{{base_url}}/product/by-string/Audi R8 V10
->```
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-# 📁 Collection: Customer 
+### 4. Delete Product by Id
 
 
-## End-point: Get All Customer
-### Method: GET
->```
->{{base_url}}/customer/get-all
->```
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+***Endpoint:***
 
-## End-point: Insert New Customer
-### Method: POST
->```
->{{base_url}}/customer/insert
->```
-### Body (**raw**)
+```bash
+Method: DELETE
+Type: 
+URL: {{base_url}}/product/by-string/Audi R8 V10
+```
 
-```json
+
+
+## Customer
+
+
+
+### 1. Get All Customer
+
+
+
+***Endpoint:***
+
+```bash
+Method: GET
+Type: 
+URL: {{base_url}}/customer/get-all
+```
+
+
+
+### 2. Insert New Customer
+
+
+
+***Endpoint:***
+
+```bash
+Method: POST
+Type: RAW
+URL: {{base_url}}/customer/insert
+```
+
+
+
+***Body:***
+
+```js        
 {
     "firstName": "Andrew",
     "lastName": "Tate",
@@ -141,24 +269,38 @@ This application store and calculate data between product and customer.
 ```
 
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: Delete Customer By Id
-### Method: DELETE
->```
->{{base_url}}/customer/by-integer/6
->```
+### 3. Delete Customer By Id
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: Update Customer
-### Method: PUT
->```
->{{base_url}}/customer/6
->```
-### Body (**raw**)
 
-```json
+***Endpoint:***
+
+```bash
+Method: DELETE
+Type: 
+URL: {{base_url}}/customer/by-integer/6
+```
+
+
+
+### 4. Update Customer
+
+
+
+***Endpoint:***
+
+```bash
+Method: PUT
+Type: RAW
+URL: {{base_url}}/customer/6
+```
+
+
+
+***Body:***
+
+```js        
 {
     "lastName": "Collins",
    
@@ -168,26 +310,42 @@ This application store and calculate data between product and customer.
 ```
 
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-# 📁 Collection: PaymentDetail 
+
+## PaymentDetail
 
 
-## End-point: Get All Payment Detail
-### Method: GET
->```
->{{base_url}}/paymentDetail/get-all
->```
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+### 1. Get All Payment Detail
 
-## End-point: Insert New Payment Detail
-### Method: POST
->```
->{{base_url}}/paymentDetail/insert
->```
-### Body (**raw**)
 
-```json
+
+***Endpoint:***
+
+```bash
+Method: GET
+Type: 
+URL: {{base_url}}/paymentDetail/get-all
+```
+
+
+
+### 2. Insert New Payment Detail
+
+
+
+***Endpoint:***
+
+```bash
+Method: POST
+Type: RAW
+URL: {{base_url}}/paymentDetail/insert
+```
+
+
+
+***Body:***
+
+```js        
 {
     "installmentYear":"2",
     "interestRate":0.05
@@ -195,16 +353,24 @@ This application store and calculate data between product and customer.
 ```
 
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: Update Payment Detail
-### Method: PUT
->```
->{{base_url}}/paymentDetail/7
->```
-### Body (**raw**)
+### 3. Update Payment Detail
 
-```json
+
+
+***Endpoint:***
+
+```bash
+Method: PUT
+Type: RAW
+URL: {{base_url}}/paymentDetail/7
+```
+
+
+
+***Body:***
+
+```js        
 {
     "installmentYear":3
    
@@ -212,41 +378,56 @@ This application store and calculate data between product and customer.
 ```
 
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: Delete Payment Detail By ID
-### Method: DELETE
->```
->{{base_url}}/paymentDetail/by-integer/7
->```
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-# 📁 Collection: Transaction 
-
-
-## End-point: Get All Transaction
-### Method: GET
->```
->{{base_url}}/transaction/get-all
->```
-### Query Params
-
-|Param|value|
-|---|---|
-|id||
+### 4. Delete Payment Detail By ID
 
 
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+***Endpoint:***
 
-## End-point: Insert New Transaction
-### Method: POST
->```
->{{base_url}}/transaction/insert
->```
-### Body (**raw**)
+```bash
+Method: DELETE
+Type: 
+URL: {{base_url}}/paymentDetail/by-integer/7
+```
 
-```json
+
+
+## Transaction
+
+
+
+### 1. Get All Transaction
+
+
+
+***Endpoint:***
+
+```bash
+Method: GET
+Type: 
+URL: {{base_url}}/transaction/get-all
+```
+
+
+
+### 2. Insert New Transaction
+
+
+
+***Endpoint:***
+
+```bash
+Method: POST
+Type: RAW
+URL: {{base_url}}/transaction/insert
+```
+
+
+
+***Body:***
+
+```js        
 {
     "customerId":"5",
     "paymentId":"2",
@@ -255,23 +436,28 @@ This application store and calculate data between product and customer.
 ```
 
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: Delete Transaction By Id
-### Method: DELETE
->```
->{{base_url}}/transaction/delete?transactionId=TRX/2022/JUNE/1
->```
-### Query Params
-
-|Param|value|
-|---|---|
-|transactionId|TRX/2022/JUNE/1|
+### 3. Delete Transaction By Id
 
 
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-_________________________________________________
-Powered By: [postman-to-markdown](https://github.com/bautistaj/postman-to-markdown/)
+***Endpoint:***
+
+```bash
+Method: DELETE
+Type: 
+URL: {{base_url}}/transaction/delete
+```
 
 
+
+***Query params:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| transactionId | TRX/2022/JUNE/1 |  |
+
+
+
+---
+[Back to top](#installment-rate-app-by-irfan-r)
