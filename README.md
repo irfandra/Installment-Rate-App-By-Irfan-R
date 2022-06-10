@@ -20,7 +20,7 @@ and also calculating all necessary prices such as monthly payment, down payment,
 - MS SQL
 
 #### ERD Design
-![alt text](https://github.com/irfandra//blob/[branch]/image.jpg](https://github.com/irfandra/Installment-Rate-App-By-Irfan-R/blob/main/InstallmentAppERD.png)?raw=true)
+![alt text](https://github.com/irfandra/Installment-Rate-App-By-Irfan-R/blob/main/InstallmentAppERD.png)
 
 
 ## Variables
