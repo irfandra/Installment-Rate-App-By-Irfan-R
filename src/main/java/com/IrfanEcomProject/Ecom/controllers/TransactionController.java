@@ -1,6 +1,7 @@
 package com.IrfanEcomProject.Ecom.controllers;
 
 import com.IrfanEcomProject.Ecom.dtos.RestResponse;
+import com.IrfanEcomProject.Ecom.dtos.transaction.TransactionCustomerDTO;
 import com.IrfanEcomProject.Ecom.dtos.transaction.TransactionHeaderDTO;
 import com.IrfanEcomProject.Ecom.dtos.transaction.TransactionInsertDTO;
 import com.IrfanEcomProject.Ecom.service.TransactionService;
@@ -23,6 +24,14 @@ public class TransactionController {
     public ResponseEntity<RestResponse<List<TransactionHeaderDTO>>> getAllTransaction() {
         return new ResponseEntity<>(
                 new RestResponse<>(transactionService.findAllTransaction(),
+                        "Transaction Find Success",
+                        200),
+                HttpStatus.OK);
+    }
+    @GetMapping("get-by-full-name")
+    public ResponseEntity<RestResponse<List<TransactionCustomerDTO>>> getTransactionByFullName(@RequestParam String fullName) {
+        return new ResponseEntity<>(
+                new RestResponse<>(transactionService.findTransactionByFullName(fullName),
                         "Transaction Find Success",
                         200),
                 HttpStatus.OK);

@@ -20,6 +20,7 @@ public class TransactionHeaderDTO {
     private final String totalPrice;
 
 
+
     public static TransactionHeaderDTO set(Transaction transaction) {
         Locale locale = new Locale("id", "ID");
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
