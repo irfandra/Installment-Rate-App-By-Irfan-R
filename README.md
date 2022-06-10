@@ -19,6 +19,14 @@ and also calculating all necessary prices such as monthly payment, down payment,
 #### Database used :
 - MS SQL
 
+
+# Installment Rate App By Irfan R
+
+
+
+<!--- If we have only one group/collection, then no need for the "ungrouped" heading -->
+
+
 ## Variables
 
 | Key | Value | Type |
@@ -51,8 +59,9 @@ and also calculating all necessary prices such as monthly payment, down payment,
     1. [Delete Payment Detail By ID](#4-delete-payment-detail-by-id)
 * [Transaction](#transaction)
     1. [Get All Transaction](#1-get-all-transaction)
-    1. [Insert New Transaction](#2-insert-new-transaction)
-    1. [Delete Transaction By Id](#3-delete-transaction-by-id)
+    1. [Get Transaction By Customer FullName](#2-get-transaction-by-customer-fullname)
+    1. [Insert New Transaction](#3-insert-new-transaction)
+    1. [Delete Transaction By Id](#4-delete-transaction-by-id)
 
 --------
 
@@ -411,7 +420,29 @@ URL: {{base_url}}/transaction/get-all
 
 
 
-### 2. Insert New Transaction
+### 2. Get Transaction By Customer FullName
+
+
+
+***Endpoint:***
+
+```bash
+Method: GET
+Type: 
+URL: {{base_url}}/transaction/get-by-full-name
+```
+
+
+
+***Query params:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| fullName | Andrew |  |
+
+
+
+### 3. Insert New Transaction
 
 
 
@@ -429,15 +460,15 @@ URL: {{base_url}}/transaction/insert
 
 ```js        
 {
-    "customerId":"5",
-    "paymentId":"2",
-    "productName":"BMW 328i"
+    "customerId":"2",
+    "paymentId":"1",
+    "productName":"Mercedes Benz C300"
 }
 ```
 
 
 
-### 3. Delete Transaction By Id
+### 4. Delete Transaction By Id
 
 
 
@@ -455,9 +486,11 @@ URL: {{base_url}}/transaction/delete
 
 | Key | Value | Description |
 | --- | ------|-------------|
-| transactionId | TRX/2022/JUNE/1 |  |
+| transactionId | TRX/2022/JUNE/3 |  |
 
 
 
 ---
 [Back to top](#installment-rate-app-by-irfan-r)
+
+
