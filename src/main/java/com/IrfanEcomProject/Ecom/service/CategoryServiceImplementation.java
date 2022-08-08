@@ -49,7 +49,7 @@ public class CategoryServiceImplementation implements CategoryService {
     public boolean updateCategory(String categoryId, CategoryInsertDTO categoryUpdate) {
         Category checkId = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new EntityNotFoundException("Category " + categoryId + " Not Found"));
-        ;
+
         checkId.setId(categoryUpdate.getCategoryName() == null ? checkId.getId() : categoryUpdate.getCategoryName());
         checkId.setDescription(categoryUpdate.getDescription() == null ? checkId.getDescription() : categoryUpdate.getDescription());
         categoryRepository.save(checkId);
