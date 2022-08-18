@@ -15,6 +15,7 @@ public class ProductHeaderDTO {
     private final String price;
     private final String categoryName;
     private final Integer unitInStock;
+    private final String image;
 
     public static ProductHeaderDTO set(Product product) {
         Locale locale = new Locale("id", "ID");
@@ -25,7 +26,8 @@ public class ProductHeaderDTO {
                 product.getDescription(),
                 currencyFormatter.format(product.getPrice()),
                 product.getCategoryName().getId(),
-                product.getUnitInStock());
+                product.getUnitInStock(),
+                product.getImage());
     }
     public static List<ProductHeaderDTO> toList(List<Product> products) {
         List<ProductHeaderDTO> result = new ArrayList<>();

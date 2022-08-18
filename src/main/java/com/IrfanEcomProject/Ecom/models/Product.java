@@ -28,15 +28,19 @@ public class Product {
     @Column(name = "UnitInStock")
     private Integer unitInStock;
 
+    @Column(name = "Image")
+    private String image;
+
     @OneToMany(mappedBy = "productName")
     private Set<Transaction> transactions = new LinkedHashSet<>();
 
-    public Product(String productName, String description, String price, String categoryName, Integer unitInStock) {
+    public Product(String productName, String description, String price, String categoryName, Integer unitInStock, String image) {
         this.id = productName;
         this.description = description;
         this.price = new BigDecimal(price);
         this.categoryName = new Category(categoryName);
         this.unitInStock = unitInStock;
+        this.image = image;
     }
 
     public Product(String productName) {
@@ -81,6 +85,14 @@ public class Product {
 
     public void setUnitInStock(Integer unitInStock) {
         this.unitInStock = unitInStock;
+    }
+
+    public String getImage(){
+        return image;
+    }
+
+    public void setImage(){
+        this.image = image;
     }
 
     public Set<Transaction> getTransactions() {

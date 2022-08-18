@@ -11,6 +11,7 @@ public class ProductInsertDTO {
     private String price;
     private String categoryName;
     private Integer unitInStock;
+    private String image;
 
 
     public Product toProduct() {
@@ -19,6 +20,7 @@ public class ProductInsertDTO {
                 description,
                 price,
                 categoryName,
-                unitInStock);
+                unitInStock,
+                image);
     }
 }
